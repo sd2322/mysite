@@ -1,0 +1,54 @@
+{% extends "en/base.html" %}
+
+<style type="text/css">
+	
+</style>
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<br>
+		<a href="{{url_for('items', lang='en')}}"><center><button type="button" class="btn btn-dark btn-lg btn-block">
+			<h3 style="color: white;">&#128096;
+RELAXBIZ - satisfy your desires.</h3>
+		</button></center></a>
+		<hr>
+		<div class="d-flex align-content-start flex-wrap">
+				{% if categories %}
+					{% for cat in categories%} 	
+					<a href="/en/categories/{{ cat.id }}"  style="color:white;text-decoration:none">					
+					<div style="margin: 5px; ">
+					   	<button type="button" class="btn btn-dark" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem; text-align: center;">
+					    	<p>{{cat.name_en}}</p>
+						</button>
+				  	</div>
+				  	</a>	
+				  {% endfor %}
+				{% endif %}
+		</div>
+		<hr>
+		<h4 style="margin-left: 6rem;">Latest products</h4>
+		<div class="my-cards" style="display: flex; flex-wrap: wrap; justify-content: center;">
+			{% for item in items %}
+					<a href="product/{{item.id}}" style="text-decoration:none">
+					<div class="card" style="padding:5px; max-width: 15rem; max-height: 23rem;margin: 10px;">
+						{% if item.get_title_img() %}
+						<img src="data:;base64,{{ b64encode(item.get_title_img().data).decode('ascii') }}" width="200" height="200" style="border-radius: 5px;"/>
+						{% endif %}
+						  <div class="card-body text-primary">
+						   <h6 class="card-title" style="color: black">{{item.name_en}}</h6>
+						   <hr>
+						   <div style="display: flex; justify-content; space-between;">
+							   <p class="card-text" style="flex-basis: 35%; pointer-events: none;"><a href="#" class="btn btn-dark" disabled>{{item.price_eur}} 
+							   €</a></p>
+							   <p class="card-text"><a href="{{url_for('viewproduct', lang='en', product_id=item.id)}}" class="btn btn-primary">Buy
+							   </a></p>
+							</div>
+						  </div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "admin/master.html" %}
+
+
+{% block body %}
+	<div class="input-group mb-3">
+					  <span class="input-group-text" id="inputGroup-sizing-default">Категорія</span>
+						<select id="cars" name="obj_type" style="width: 20vh">
+							{% for cat in categories%}
+						  		<option value="{{cat.id}}">{{cat.name_ua}}</option>
+						  	{% endfor %}
+						</select>
+					  
+					  
+	</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "ua/base.html" %}
+
+{% block title %}Підтримка{% endblock %}
+
+{% block content %}
+	<div class="wrapper position-absolute top-50 start-50 translate-middle" style="width: 60%">
+        <form action="#" method="POST">
+        <div class="mb-3" style="width: 100%;">
+          <label for="exampleFormControlInput1" class="form-label">Ваш Email</label>
+          <input type="email" name="email" class="form-control" placeholder="Email" required>
+          <br>
+          <label for="exampleFormControlInput1" class="form-label">Ваше повідомлення</label>
+          <textarea class="form-control" aria-label="With textarea" placeholder="Повідомлення" name="message" style="resize: none;" rows="6" minlength="30" maxlength="1000" required></textarea>
+        </div>  
+        <button type="submit" class="btn btn-primary">Відправити</button>
+        </form>
+    </div>
+{% endblock %}

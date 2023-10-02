@@ -1,0 +1,95 @@
+{% extends "ru/base.html" %}
+
+{% block title %}Товары{% endblock %}
+
+{% block content %}
+
+	<div class="container" style="padding-top: 10px;">
+		<form action="#" method="POST">
+			<h5>Категории</h5>
+			<div class="d-flex align-content-start flex-wrap">
+				{% if categories %}
+				<a href="/ru/all-products"  style="color:white;text-decoration:none">
+					<div style="margin: 5px; ">
+					   	<button type="button" class="btn btn-dark" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .80rem; text-align: center;">
+					    	<p>Все</p>
+						</button>
+				  	</div>	
+				</a>
+					{% for cat in categories%} 	
+					<a href="/ru/categories/{{ cat.id }}"  style="color:white;text-decoration:none">					
+					<div style="margin: 5px; ">
+					   	<button type="button" class="btn btn-dark" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem; text-align: center;">
+					    	<p>{{cat.name_ru}}</p>
+						</button>
+				  	</div>
+				  	</a>	
+				  {% endfor %}
+				{% endif %}
+			</div>
+			<hr>
+			<div>
+				<div class="input-group mb-3">
+				  <input type="text" name="search_request" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Введите название товара">
+				  <button type="submit" class="btn btn-success">Найти</button>
+				</div>
+			</div>
+		</form>
+	</div>
+{% if items is not none %}
+		<div class="my-cards" style="display: flex; flex-wrap: wrap; justify-content: center;">
+			{% for item in items %}
+					<a href="/ru/product/{{item.id}}" style="text-decoration:none">
+					<div class="card" style="padding:5px; max-width: 18rem; margin: 20px;">
+						{% if item.get_title_img() %}
+						<img src="data:;base64,{{ b64encode(item.get_title_img().data).decode('ascii') }}" width="200" height="200" style="border-radius: 5px;"/>
+						{% endif %}
+						  <div class="card-body text-primary">
+						   <h5 class="card-title" style="color: black">{{item.name_ru}}</h5>
+						   <hr>
+						   <div style="display: flex; justify-content; space-between;">
+							   <p class="card-text" style="flex-basis: 40%; pointer-events: none;"><a href="#" class="btn btn-dark" disabled>{{item.price_ru}} 
+							   руб.</a></p>
+							   <p class="card-text"><a href="/ru/product/{{item.id}}" class="btn btn-primary">Купить 
+							   </a></p>
+							</div>
+						  </div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		<nav aria-label="Page navigation example" style="display: flex; justify-content: center">
+  			<ul class="pagination">
+           		<li class="page-item">
+           			<a class="page-link {% if items.page == 1 %}disabled{% endif %}" href="{{url_for('items', lang='ru',page=items.prev_num)}}"
+						>Previous
+					</a>
+				</li>
+
+				{% for page_num in items.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+					{% if items.page == page_num %}
+						<li class="page-item"><a class="page-link" href="{{url_for('items',lang='ru',
+						page=page_num)}}">{{page_num}}</a></li>
+					{% else %}
+						<li class="page-item"><a class="page-link" href="{{url_for('items',lang='ru',
+						page=page_num)}}">{{page_num}}</a></li>
+					{% endif %}
+				{% endfor %}
+				<li class="page-item">
+           			<a class="page-link {% if items.page == items.pages %}disabled {% endif %}" href="{{ url_for('items', lang='ru', page=items.page+1) }}"
+						>Next
+					</a>
+				</li>
+			</ul>
+		</nav>
+		</center>	
+		<br>
+</div>
+{% else %}
+	<br>
+	<div class="container">
+		<h3>Нічого не знайдено.</h3>
+	</div>
+{% endif %}
+	
+{% endblock %}

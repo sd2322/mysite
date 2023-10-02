@@ -1,0 +1,23 @@
+{% extends "admin/master.html" %}
+
+
+{% block body %}
+	<div class="wrapper position-absolute top-50 start-50 translate-middle">
+        <form action="#" method="POST">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Категорія (укр)</label>
+          <input type="text" name="category_ua" class="form-control" placeholder="Категорія">
+
+          <label for="exampleFormControlInput1" class="form-label">Category (eng)</label>
+          <input type="text" name="category_en" class="form-control" placeholder="Category">
+
+          <label for="exampleFormControlInput1" class="form-label">Категория (ru)</label>
+          <input type="text" name="category_ru" class="form-control" placeholder="Категория">
+
+          <label for="exampleFormControlInput1" class="form-label">Kategorie (ge)</label>
+          <input type="text" name="category_ge" class="form-control" placeholder="Kategorie">
+        </div>  
+        <button type="submit" class="btn btn-primary">Додати категорію/Add category</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "ru/base.html" %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
+	<div class="container" style="display: flex; flex-direction: column;justify-content: center;">
+		<br>
+		{% if items %}
+			<center>
+			{% for item in items %}
+				<br>
+				<div class="card border-dark mb-3" style="max-width: 18rem;">
+
+				  <div class="card-body text-primary" style="width: 100%;">
+				  	<div style="display: flex; flex-direction: row;">
+					  	<img src="data:;base64,{{ b64encode(item.get_title_img().data).decode('ascii') }}" width="74" height="74" style="border-radius: 5px; "/>
+					    <h5 class="card-title" style="margin-left: 5px; color: black">{{item.name_ru}}</h5>
+					    
+					</div>
+					<p class="card-text" style=" pointer-events: none;"><a href="#" class="btn btn-dark" disabled>{{item.price_ru}} 
+							   руб.</a></p>
+						<a href="{{url_for('delcast', lang='ru', product_id=item.id)}}"><button type="button" class="btn btn-danger">Удалить из корзины</button></a>
+				  </div>
+				</div>
+			{% endfor %}
+			</center>
+			<h3>Общая сумма: {{full_price}} рублей</h3>
+			<button type="button" class="btn btn-success">Заказать</button>
+		{% else %}
+			<h3>Корзина пустая</h3>
+	   	{% endif %}
+	   	<br>
+	</div>
+{% endblock %}

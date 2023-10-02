@@ -1,0 +1,34 @@
+{% extends "admin/master.html" %}
+
+
+{% block body %}
+	<div class="wrapper position-absolute top-50 start-50 translate-middle" style="width: 75%">
+		<h3>Додати </h3>
+		<hr>
+		<form action="#" method="POST" enctype="multipart/form-data">
+			<div class="input-group mb-3">
+			  
+					<div class="input-group mb-3">
+					  <span class="input-group-text" id="inputGroup-sizing-default">Категорія</span>
+						<select id="cars" name="obj_type" style="width: 13vh">
+							{% for cat in categories%}
+						  		<option value="{{cat.id}}">{{cat.name_ua}}</option>
+						  	{% endfor %}
+						</select>
+					  <input type="text" name="name_ua" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Назва ( title ) ua" required=""><br>
+					  
+					</div>
+			  
+			</div>
+			<input type="text" name="price_ua" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ціна (грн.)" required="">
+			<input type="text" name="price_ru" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ціна (руб.)" required="">
+			<input type="text" name="price_eur" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ціна (euro.)" required=""><br>
+			<textarea class="form-control" aria-label="With textarea" placeholder="Опис укр" name="desc" rows="6"></textarea>
+			<br>
+			<input class="form-control" type="file" name="form_file" accept="image/*" multiple required>
+			<br>
+			<button type="submit" class="btn btn-success">Додати товар</button>
+		</form>
+		<br>
+	</div>
+{% endblock %}
